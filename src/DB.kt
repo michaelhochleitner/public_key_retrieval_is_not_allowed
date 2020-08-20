@@ -9,12 +9,13 @@ class DBLogger {
         val id = integer("id").autoIncrement() // Column<Int>
         val name = varchar("name", 50) // Column<String>
 
+        override val primaryKey = PrimaryKey(id, name = "PK_User_ID") // name is optional here
     }
 
     companion object {
         fun logCity() {
             Database.connect(
-                "jdbc:mysql://localhost:3306/exposed?useSSL=false", driver = "com.mysql.jdbc.Driver",
+                "jdbc:mysql://localhost:3306/exposed?useSSL=false&allowPublicKeyRetrieval=true", driver = "com.mysql.jdbc.Driver",
                 user = "exp", password = "strong_password"
             )
             transaction {
